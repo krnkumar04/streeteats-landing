@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Street Eats - Haldwani Ka Pehla Street Food App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF6B2B;
+            --bg: #1A1A2E;
+            --cards: #0F3460;
+            --accent: #FFD700;
+            --text: #FFFFFF;
+            --muted: #A0A8C0;
+            --success: #00C48C;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navbar */
+        header {
+            padding: 20px 0;
+            background: rgba(26, 26, 46, 0.95);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+        }
+
+        .logo-text {
+            color: var(--text);
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .ig-link {
+            color: var(--muted);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .ig-link:hover {
+            color: var(--primary);
+        }
+
+        .badge-gold {
+            background-color: var(--accent);
+            color: #000;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 150px 0 80px;
+            text-align: center;
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at 50% 30%, #2a2a4a 0%, var(--bg) 70%);
+        }
+
+        .launch-badge {
+            background-color: rgba(255, 107, 43, 0.1);
+            color: var(--primary);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            border: 1px solid var(--primary);
+            display: inline-block;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--muted);
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .signup-form {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 50px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .signup-form input {
+            flex: 1;
+            padding: 15px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--cards);
+            background: rgba(15, 52, 96, 0.5);
+            color: var(--text);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .signup-form input:focus {
+            border-color: var(--primary);
+        }
+
+        .signup-form button {
+            background-color: var(--primary);
+            color: var(--text);
+            border: none;
+            padding: 0 30px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .signup-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 107, 43, 0.3);
+        }
+
+        .store-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .store-btn {
+            background: var(--cards);
+            padding: 12px 25px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--muted);
+            text-decoration: none;
+            cursor: not-allowed;
+            opacity: 0.7;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .store-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .store-btn div {
+            text-align: left;
+        }
+
+        .store-btn small {
+            display: block;
+            font-size: 0.7rem;
+            line-height: 1;
+        }
+
+        .store-btn strong {
+            font-size: 1rem;
+            display: block;
+            line-height: 1.2;
+        }
+
+        /* Countdown Section */
+        .countdown-section {
+            padding: 60px 0;
+            background: var(--cards);
+            text-align: center;
+        }
+
+        .countdown-title {
+            color: var(--accent);
+            margin-bottom: 30px;
+            font-size: 1.5rem;
+        }
+
+        .timer-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .time-box {
+            background: var(--bg);
+            padding: 20px;
+            border-radius: 12px;
+            min-width: 100px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .time-box span {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .time-box p {
+            color: var(--muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--cards);
+            padding: 40px 30px;
+            border-radius: 16px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 80px 0 120px;
+            background: linear-gradient(180deg, var(--bg) 0%, #151525 100%);
+        }
+
+        .steps-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .step-card {
+            background: var(--cards);
+            padding: 30px;
+            border-radius: 16px;
+            flex: 1;
+            max-width: 300px;
+            text-align: center;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: var(--text);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 4px solid var(--bg);
+        }
+
+        .step-card h3 {
+            margin-top: 20px;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--cards);
+            padding: 60px 0 30px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .footer-logo span {
+            color: var(--primary);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-contact {
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .footer-bottom {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--muted);
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        .whatsapp-float svg {
+            width: 35px;
+            height: 35px;
+            fill: white;
+        }
+
+        /* Modals for Policies */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: var(--bg);
+            margin: 10% auto;
+            padding: 40px;
+            border: 1px solid var(--cards);
+            width: 90%;
+            max-width: 600px;
+            border-radius: 16px;
+            position: relative;
+            color: var(--muted);
+        }
+
+        .modal-content h2 {
+            color: var(--text);
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--cards);
+            padding-bottom: 10px;
+        }
+
+        .modal-content ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .close-btn {
+            color: var(--muted);
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 15px;
+        }
+
+        .close-btn:hover {
+            color: var(--primary);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 2.5rem; }
+            .features-grid { grid-template-columns: 1fr; }
+            .steps-container { flex-direction: column; align-items: center; }
+            .step-card { width: 100%; margin-bottom: 30px; }
+        }
+
+        @media (max-width: 600px) {
+            .navbar { flex-direction: column; gap: 15px; }
+            .hero { padding-top: 180px; }
+            .signup-form { flex-direction: column; }
+            .store-buttons { flex-direction: column; }
+            .timer-container { gap: 10px; }
+            .time-box { padding: 15px; min-width: 80px; }
+            .time-box span { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container navbar">
+            <a href="#" class="logo-container">
+                <img src="1000132866.jpg" alt="Street Eats Logo" class="logo-img">
+                <span class="logo-text">Street Eats</span>
+            </a>
+            <div class="nav-right">
+                <a href="https://instagram.com/streeteats.hld" target="_blank" class="ig-link">@streeteats.hld</a>
+                <span class="badge-gold">Coming Soon</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero container">
+        <div class="launch-badge">🚀 Launching April 2026 in Haldwani</div>
+        <h1>Haldwani Ka Pehla<br>Street Food App</h1>
+        <p>Ghar Baithe Mangao — Momos, Burger, Chowmein & More. Straight from your favorite local stalls to your doorstep.</p>
+        
+        <form class="signup-form" onsubmit="alert('Thanks! We will notify you when we launch.'); return false;">
+            <input type="email" placeholder="Enter your email" required>
+            <button type="submit">Get Notified on Launch</button>
+        </form>
+
+        <div class="store-buttons">
+            <a href="#" class="store-btn">
+                <svg viewBox="0 0 384 512"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+                <div>
+                    <small>Coming soon on</small>
+                    <strong>App Store</strong>
+                </div>
+            </a>
+            <a href="#" class="store-btn">
+                <svg viewBox="0 0 512 512"><path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"/></svg>
+                <div>
+                    <small>Coming soon on</small>
+                    <strong>Google Play</strong>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section class="countdown-section">
+        <div class="container">
+            <h2 class="countdown-title">Countdown to Launch (April 15, 2026)</h2>
+            <div class="timer-container" id="timer">
+                <div class="time-box">
+                    <span id="days">00</span>
+                    <p>Days</p>
+                </div>
+                <div class="time-box">
+                    <span id="hours">00</span>
+                    <p>Hours</p>
+                </div>
+                <div class="time-box">
+                    <span id="minutes">00</span>
+                    <p>Minutes</p>
+                </div>
+                <div class="time-box">
+                    <span id="seconds">00</span>
+                    <p>Seconds</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features container">
+        <h2 class="section-title">Kyun Chunein Street Eats?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <h3>30 Min Delivery</h3>
+                <p style="color: var(--muted); margin-top: 10px; font-size: 0.9rem;">Garam aur fresh khana, direct stall se aapke ghar tak 30 minute mein.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🕒</div>
+                <h3>Open 5 PM to 9 PM Daily</h3>
+                <p style="color: var(--muted); margin-top: 10px; font-size: 0.9rem;">Shaam ki bhookh ka perfect ilaaj. Hum roz shaam aapki service mein hain.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📍</div>
+                <h3>Haldwani Ke Best Stalls</h3>
+                <p style="color: var(--muted); margin-top: 10px; font-size: 0.9rem;">Bhotiya Padav se lekar Tikonia tak, sabhi famous stalls ek app par.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">Order Karna Bahut Aasan Hai</h2>
+            <div class="steps-container">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>App download karo</h3>
+                    <p style="color: var(--muted); font-size: 0.9rem; margin-top: 10px;">April 2026 mein Play Store ya App Store se download karein.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Apna address daalo</h3>
+                    <p style="color: var(--muted); font-size: 0.9rem; margin-top: 10px;">Haldwani mein apni live location set karein aur menu dekhein.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Street food mangao ghar pe</h3>
+                    <p style="color: var(--muted); font-size: 0.9rem; margin-top: 10px;">Order place karein aur relax karein. Delivery partner raaste mein hai!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-logo">Street <span>Eats</span></div>
+            <div class="footer-links">
+                <a onclick="openModal('privacyModal')">Privacy Policy</a>
+                <a onclick="openModal('refundModal')">Refund Policy</a>
+                <a href="mailto:krnkumarbusiness@gmail.com">Contact Us</a>
+            </div>
+            <div class="footer-contact">
+                ✉️ krnkumarbusiness@gmail.com
+            </div>
+            <div class="footer-bottom">
+                <p>❤️ Made with love in Haldwani</p>
+                <p>&copy; 2026 Street Eats. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/918630140017" target="_blank" class="whatsapp-float">
+        <svg viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-23.1-115-65-157zM223.9 413.6c-33.1 0-65.5-8.9-94-25.7l-6.7-4-69.8 18.3L72 334.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101
